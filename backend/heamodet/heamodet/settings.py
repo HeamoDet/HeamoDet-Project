@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'user_management'
 ]
 
 MIDDLEWARE = [
@@ -50,11 +53,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'heamodet.urls'
-
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +78,40 @@ WSGI_APPLICATION = 'heamodet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Heamodet',           # Database name created in Step 2
+        'USER': 'postgres',       # PostgreSQL username
+        'PASSWORD': '12345',        # PostgreSQL password
+        'HOST': 'localhost',           # Database host, use 'localhost' for local setup
+        'PORT': '5432',                # Default PostgreSQL port
     }
 }
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+         'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ]
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'heamodetproject@gmail.com'  # your email address
+EMAIL_HOST_PASSWORD = 'xhyk qsxa ojqp ycpl'  # your email password
+DEFAULT_FROM_EMAIL = 'Your App Name <your_email@gmail.com>'
 
 
 # Password validation
