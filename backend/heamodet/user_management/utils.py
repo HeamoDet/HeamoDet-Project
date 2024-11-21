@@ -5,7 +5,7 @@ from django.utils import timezone
 
 def generate_otp():
    
-    return f'{random.randint(100000, 999999)}'
+    return f'{random.randint(1000, 9999)}'
 
 def is_otp_valid(otp_entry):
 

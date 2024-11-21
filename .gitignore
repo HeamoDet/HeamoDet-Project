@@ -1,7 +1,41 @@
 # Ignore node_modules folder
 node_modules/
 #Ignore migrations files 
-*/migrations/
+# Ignore all migrations files
+*/migrations/*.py
+*/migrations/__init__.py
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.sqlite3
+
+# Ignore database
+db.sqlite3
+*.db
+
+# Ignore virtual environment
+venv/
+.env
+.env.local
+
+# Ignore media and static files
+/media
+/static
+
+# Ignore all migrations files except __init__.py
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
 
 
 # Ignore logs
